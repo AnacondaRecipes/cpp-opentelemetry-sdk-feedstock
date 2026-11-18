@@ -32,25 +32,25 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ stdlib("c") }}
     - cmake >=3.1
-    - ninja
+    - ninja-base
     - proto-opentelemetry-proto =1.6.0
 
     # For cross-compiling
     - curl                    # [build_platform != target_platform]
-    - libgrpc                 # [build_platform != target_platform]
-    - libprotobuf             # [build_platform != target_platform]
-    - nlohmann_json >=3.10.5  # [build_platform != target_platform]
-    - zlib                    # [build_platform != target_platform]
-    - prometheus-cpp          # [build_platform != target_platform]
+    - libgrpc {{ libgrpc }}       # [build_platform != target_platform]
+    - libprotobuf {{ libprotobuf }}  # [build_platform != target_platform]
+    - nlohmann_json >=3.10.5       # [build_platform != target_platform]
+    - zlib {{ zlib }}              # [build_platform != target_platform]
+    - prometheus-cpp {{ prometheus_cpp }}.*  # [build_platform != target_platform]
   host:
-    - libabseil
-    - libcxx-devel  # [osx]
-    - libcurl
-    - libgrpc
-    - libprotobuf
+    - libabseil {{ libabseil }}
+    - libcxx-devel {{ cxx_compiler_version }}  # [osx]
+    - libcurl {{ libcurl }}
+    - libgrpc {{ libgrpc }}
+    - libprotobuf {{ libprotobuf }}
     - nlohmann_json >=3.10.5
-    - zlib
-    - prometheus-cpp
+    - zlib {{ zlib }}
+    - prometheus-cpp {{ prometheus_cpp }}.*
 
 outputs:
   - name: libopentelemetry-cpp-headers
@@ -102,17 +102,17 @@ outputs:
         - cmake
       host:
         - {{ pin_subpackage("libopentelemetry-cpp-headers", exact=True) }}
-        - libabseil
-        - libcurl
-        - libgrpc
-        - libprotobuf
+        - libabseil {{ libabseil }}
+        - libcurl {{ libcurl }}
+        - libgrpc {{ libgrpc }}
+        - libprotobuf {{ libprotobuf }}
         - nlohmann_json >=3.10.5
-        - zlib
-        - prometheus-cpp
+        - zlib {{ zlib }}
+        - prometheus-cpp {{ prometheus_cpp }}.*
       run:
         - {{ pin_subpackage("libopentelemetry-cpp-headers", exact=True) }}
         - nlohmann_json
-        - prometheus-cpp
+        - prometheus-cpp {{ prometheus_cpp }}.*
       run_constrained:
         # make sure we don't co-install with old version of old package name
         - cpp-opentelemetry-sdk ={{ version }}
@@ -158,13 +158,13 @@ outputs:
     requirements:
       host:
         # match host deps to avoid hash collisions between wrappers
-        - libabseil
-        - libcurl
-        - libgrpc
-        - libprotobuf
+        - libabseil {{ libabseil }}
+        - libcurl {{ libcurl }}
+        - libgrpc {{ libgrpc }}
+        - libprotobuf {{ libprotobuf }}
         - nlohmann_json
-        - zlib
-        - prometheus-cpp
+        - zlib {{ zlib }}
+        - prometheus-cpp {{ prometheus_cpp }}.*
         - {{ pin_subpackage("libopentelemetry-cpp", exact=True) }}
       run:
         - {{ pin_subpackage("libopentelemetry-cpp", exact=True) }}
