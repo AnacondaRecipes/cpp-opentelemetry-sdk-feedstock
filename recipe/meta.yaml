@@ -96,6 +96,8 @@ outputs:
         - {{ pin_subpackage("libopentelemetry-cpp", max_pin="x.x") }}
     requirements:
       build:
+        - {{ compiler('cxx') }}
+        - {{ stdlib('c') }}
         - cmake
       host:
         - {{ pin_subpackage("libopentelemetry-cpp-headers", exact=True) }}
