@@ -1,7 +1,7 @@
 @echo on
 
 REM Release tarballs do not contain the required Protobuf definitions.
-robocopy /S /E %BUILD_PREFIX%\share\opentelemetry\opentelemetry-proto\opentelemetry .\third_party\opentelemetry-proto\opentelemetry >nul
+robocopy /S /E %BUILD_PREFIX%\Library\share\opentelemetry\opentelemetry-proto\opentelemetry .\third_party\opentelemetry-proto\opentelemetry >nul
 REM Stop CMake from trying to git clone the Protobuf definitions.
 mkdir .\third_party\opentelemetry-proto\.git
 
