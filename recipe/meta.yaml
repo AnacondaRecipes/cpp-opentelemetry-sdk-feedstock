@@ -25,7 +25,7 @@ source:
       - patches/0004-Define-NOMINMAX-for-Windows.patch  # [win]
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
@@ -34,14 +34,6 @@ requirements:
     - cmake >=3.1
     - ninja-base
     - proto-opentelemetry-proto =1.6.0
-
-    # For cross-compiling
-    - curl                    # [build_platform != target_platform]
-    - libgrpc {{ libgrpc }}       # [build_platform != target_platform]
-    - libprotobuf {{ libprotobuf }}  # [build_platform != target_platform]
-    - nlohmann_json >=3.10.5       # [build_platform != target_platform]
-    - zlib {{ zlib }}              # [build_platform != target_platform]
-    - prometheus-cpp {{ prometheus_cpp }}.*  # [build_platform != target_platform]
   host:
     - libabseil {{ libabseil }}
     - libcxx-devel {{ cxx_compiler_version }}  # [osx]
