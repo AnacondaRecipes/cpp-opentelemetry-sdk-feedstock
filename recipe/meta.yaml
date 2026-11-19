@@ -32,7 +32,7 @@ requirements:
     - {{ stdlib("c") }}
     - cmake >=3.1
     - ninja-base
-    - proto-opentelemetry-proto =1.6.0
+    - proto-opentelemetry-proto =1.6.0  # matches conda-forge; schemas copied from BUILD_PREFIX
   host:
     - libabseil {{ libabseil }}
     - libcxx-devel {{ cxx_compiler_version }}  # [osx]
